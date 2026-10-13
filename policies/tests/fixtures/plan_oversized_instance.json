@@ -1,0 +1,25 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.8",
+  "resource_changes": [
+    {
+      "address": "aws_launch_template.devops",
+      "mode": "managed",
+      "type": "aws_launch_template",
+      "name": "devops",
+      "change": {
+        "action": "create",
+        "before": null,
+        "after": {
+          "name": "devops-lab",
+          "instance_type": "m5.2xlarge",
+          "tags": {
+            "Project": "cloudybttounsi",
+            "Environment": "dev",
+            "Tier": "lab"
+          }
+        }
+      }
+    }
+  ]
+}

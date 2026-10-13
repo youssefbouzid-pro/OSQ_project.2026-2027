@@ -1,0 +1,5 @@
+bucket         = "cloudybttounsi-tfstate-ACCOUNT_ID"
+key            = "dev/terraform.tfstate"
+region         = "us-east-1"
+dynamodb_table = "cloudybttounsi-tf-lock"
+encrypt        = true

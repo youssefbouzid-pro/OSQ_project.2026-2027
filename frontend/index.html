@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CloudyBTTounsi - Learning Labs Platform">
+  <meta name="theme-color" content="#232F3E">
+  <title>CloudyBTTounsi | Learning Labs</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="learn.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-heading">
+    <form class="auth-card" id="login-form" novalidate>
+      <div class="brand brand-auth">
+        <span class="brand-mark" aria-hidden="true">CB</span>
+        <span class="brand-text">
+          <span class="brand-name">CloudyBTTounsi</span>
+          <span class="brand-sub">Learning Labs Platform</span>
+        </span>
+      </div>
+
+      <h1 id="auth-heading">Sign in to start learning</h1>
+      <p class="auth-sub">Use your personal access token to launch isolated labs, complete tasks, and submit flags.</p>
+
+      <div class="field-group">
+        <label class="field-label" for="token-input">Personal access token</label>
+        <input class="input" type="password" id="token-input" name="token" autocomplete="off" spellcheck="false" placeholder="cldy_token_...">
+        <p class="form-error" id="login-error" role="alert" hidden></p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="login-submit">
+        <span class="btn-label">Sign in</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+
+      <div class="auth-demo">
+        <p class="field-label">Demo tokens</p>
+        <ul class="token-list" id="demo-tokens">
+          <li>
+            <button type="button" class="token-btn" data-token="cldy_token_student01">
+              <span class="token-role">student</span>
+              student-01
+              <span class="token-desc">Start labs and submit flags</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="token-btn" data-token="cldy_token_admin01">
+              <span class="token-role">admin</span>
+              admin-01
+              <span class="token-desc">Manage sessions and activity</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="token-btn" data-token="cldy_token_auditor01">
+              <span class="token-role">auditor</span>
+              auditor-01
+              <span class="token-desc">Read-only activity</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </section>
+
+  <div class="app-shell" id="app-shell" hidden>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Side navigation">
+      <nav class="sidebar-nav">
+        <p class="nav-group-label">Learn</p>
+        <button type="button" class="nav-link is-active" data-view="home" aria-current="page">Home</button>
+        <button type="button" class="nav-link" data-view="catalog">Lab Catalog</button>
+        <button type="button" class="nav-link" data-view="my-labs">My Labs</button>
+        <button type="button" class="nav-link" data-view="getting-started">Getting Started</button>
+        <button type="button" class="nav-link" data-view="access-setup">Access Setup</button>
+        <button type="button" class="nav-link" data-view="help">Help & FAQ</button>
+
+        <p class="nav-group-label admin-only" hidden>Administration</p>
+        <button type="button" class="nav-link admin-only" data-view="activity" hidden>Activity</button>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-bar" id="top-bar">
+        <div class="top-bar-left">
+          <button type="button" class="icon-btn menu-btn sidebar-toggle" id="mobile-menu" aria-label="Toggle navigation">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+
+          <div class="brand top-brand">
+            <span class="brand-mark" aria-hidden="true">CB</span>
+            <span class="brand-text">
+              <span class="brand-name">CloudyBTTounsi</span>
+              <span class="brand-sub">Learning Labs</span>
+            </span>
+          </div>
+
+          <span class="top-divider" aria-hidden="true"></span>
+
+          <div class="breadcrumbs" id="breadcrumbs">
+            <span id="crumb-current">Home</span>
+          </div>
+        </div>
+
+        <nav class="top-nav" aria-label="Top navigation">
+          <button type="button" class="nav-link top-nav-link is-active" data-view="home" aria-current="page">Home</button>
+          <button type="button" class="nav-link top-nav-link" data-view="catalog">Catalog</button>
+          <button type="button" class="nav-link top-nav-link" data-view="my-labs">My Labs</button>
+          <button type="button" class="nav-link top-nav-link" data-view="getting-started">Getting Started</button>
+          <button type="button" class="nav-link top-nav-link" data-view="help">Help</button>
+        </nav>
+
+        <div class="top-bar-actions">
+          <span class="pill pill-region">Learning Labs</span>
+          <span class="pill pill-budget" id="budget-pill" hidden>$0.00 / $20.00</span>
+
+          <div class="user-chip" id="user-chip">
+            <div class="user-avatar" id="user-avatar">S</div>
+            <div class="user-info">
+              <span class="user-id" id="user-id">student-01</span>
+              <span class="user-role" id="user-role">STUDENT</span>
+            </div>
+            <button type="button" class="btn btn-ghost btn-signout" id="signout">Sign out</button>
+          </div>
+        </div>
+      </header>
+
+      <main id="main" tabindex="-1">
+        <section id="view-home" class="view" aria-labelledby="home-heading">
+          <div class="learn-hero panel">
+            <div>
+              <h1 id="home-heading">Welcome</h1>
+              <p class="view-sub" id="home-sub">Start isolated learning labs, complete tasks, and submit flags before your session expires.</p>
+              <div class="hero-actions">
+                <button type="button" class="btn btn-primary" data-goto="catalog">Browse Labs</button>
+                <button type="button" class="btn btn-secondary" data-goto="getting-started">Getting Started</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="home-grid">
+            <div class="panel learn-panel">
+              <div class="panel-head">
+                <h2>Continue Learning</h2>
+              </div>
+              <div class="panel-body" id="continue-lab"></div>
+            </div>
+
+            <div class="panel learn-panel">
+              <div class="panel-head">
+                <h2>Recommended Labs</h2>
+              </div>
+              <div class="panel-body" id="recommended-labs"></div>
+            </div>
+
+            <div class="panel learn-panel">
+              <div class="panel-head">
+                <h2>Setup Checklist</h2>
+              </div>
+              <div class="panel-body" id="setup-checklist"></div>
+            </div>
+
+            <div class="panel learn-panel">
+              <div class="panel-head">
+                <h2>Recent Sessions</h2>
+              </div>
+              <div class="panel-body" id="recent-sessions"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-catalog" class="view" aria-labelledby="catalog-heading" hidden>
+          <div class="view-head">
+            <div>
+              <h1 id="catalog-heading">Lab Catalog</h1>
+              <p class="view-sub">Choose a lab. Each lab has a difficulty level, guided tasks, and flags to prove completion.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="filter-bar">
+              <input id="catalog-search" class="input" type="search" placeholder="Search labs" aria-label="Search labs">
+              <select id="catalog-family" class="input select" aria-label="Filter by lab family">
+                <option value="all">All families</option>
+                <option value="linux">Linux Sysadmin</option>
+                <option value="dba">Database Administration</option>
+                <option value="devops">DevOps Pipeline</option>
+              </select>
+              <select id="catalog-level" class="input select" aria-label="Filter by difficulty">
+                <option value="all">All levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+
+            <div class="panel-body">
+              <div class="card-grid" id="catalog-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-my-labs" class="view" aria-labelledby="mylabs-heading" hidden>
+          <div class="view-head">
+            <div>
+              <h1 id="mylabs-heading">My Labs</h1>
+              <p class="view-sub">Track your lab sessions, connect to active environments, and end labs early if needed.</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-open-request>Start Lab</button>
+          </div>
+
+          <div class="panel">
+            <div class="panel-body" id="mylabs-list">
+              <div id="mylabs-rows" class="session-list"></div>
+
+              <div class="empty-state" id="mylabs-empty" hidden>
+                <p class="empty-title">No lab sessions</p>
+                <p class="empty-text">Start your first lab from the catalog.</p>
+                <button type="button" class="btn btn-primary" data-goto="catalog">Browse Labs</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-lab-guide" class="view" aria-labelledby="lab-guide-heading" hidden>
+          <div class="view-head">
+            <div>
+              <h1 id="lab-guide-heading">Lab Guide</h1>
+              <p class="view-sub">Read the scenario, complete tasks inside the lab, and submit flags.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" data-goto="catalog">Back to Catalog</button>
+          </div>
+
+          <div id="lab-guide-content"></div>
+        </section>
+
+        <section id="view-getting-started" class="view" aria-labelledby="getting-started-heading" hidden>
+          <div class="view-head">
+            <div>
+              <h1 id="getting-started-heading">Getting Started</h1>
+              <p class="view-sub">Learn how CloudyBTTounsi labs work.</p>
+            </div>
+          </div>
+
+          <div class="panel static-page">
+            <h2>What is CloudyBTTounsi?</h2>
+            <p>CloudyBTTounsi gives you temporary, isolated lab environments for Linux, database administration, and DevOps practice.</p>
+
+            <h2>How labs work</h2>
+            <ol class="docs-list">
+              <li>Choose a lab from the catalog.</li>
+              <li>Wait for the environment to become ready.</li>
+              <li>Connect to the lab using Tailscale SSH.</li>
+              <li>Complete the lab tasks.</li>
+              <li>Find and submit flags to prove completion.</li>
+            </ol>
+
+            <h2>Important rules</h2>
+            <ul class="docs-list">
+              <li>Each lab lasts 60 minutes.</li>
+              <li>Labs cannot be extended.</li>
+              <li>When time expires, the lab is destroyed automatically.</li>
+              <li>Do not store important data inside the lab.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="view-access-setup" class="view" aria-labelledby="access-setup-heading" hidden>
+          <div class="view-head">
+            <div>
+              <h1 id="access-setup-heading">Access Setup</h1>
+              <p class="view-sub">Set up Tailscale to connect to your lab environments.</p>
+            </div>
+          </div>
+
+          <div class="panel static-page">
+            <h2>Install Tailscale</h2>
+            <p>Install Tailscale on your laptop and sign in with your lab account.</p>
+
+            <h2>Verify your connection</h2>
+            <pre class="code-block">tailscale status</pre>
+
+            <h2>Connect to a lab</h2>
+            <pre class="code-block">tailscale ssh student@linux-beginner-12345.cloudybt-tounsi.ts.net</pre>
+
+            <h2>Troubleshooting</h2>
+            <ul class="docs-list">
+              <li>If the lab does not appear, wait until its status is Running.</li>
+              <li>If SSH fails, check that Tailscale is active on your device.</li>
+              <li>If the lab expired, start a new session.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="view-help" class="view" aria-labelledby="help-heading" hidden>
+          <div class="view-head">
+            <div>
+              <h1 id="help-heading">Help & FAQ</h1>
+              <p class="view-sub">Common questions and answers.</p>
+            </div>
+          </div>
+
+          <div class="panel static-page">
+            <details class="runbook">
+              <summary>How long does a lab last?</summary>
+              <p>Each lab lasts 60 minutes. The countdown starts when the lab becomes ready.</p>
+            </details>
+
+            <details class="runbook">
+              <summary>Can I extend my lab time?</summary>
+              <p>No. Labs have a fixed TTL. If you need more time, start a new lab.</p>
+            </details>
+
+            <details class="runbook">
+              <summary>What is a flag?</summary>
+              <p>A flag is proof that you completed a task. Flags are placed inside the lab environment by the scenario.</p>
+            </details>
+
+            <details class="runbook">
+              <summary>What happens when the lab expires?</summary>
+              <p>The lab instance is terminated automatically and its data is removed.</p>
+            </details>
+
+            <details class="runbook">
+              <summary>I cannot connect to the lab.</summary>
+              <p>Check the Access Setup page, verify Tailscale is running, and make sure the lab status is Running.</p>
+            </details>
+          </div>
+        </section>
+
+        <section id="view-activity" class="view" aria-labelledby="activity-heading" hidden>
+          <div class="view-head">
+            <div>
+              <h1 id="activity-heading">Activity</h1>
+              <p class="view-sub">Platform and lab session activity.</p>
+            </div>
+            <span class="pill pill-live"><span class="live-dot"></span> Live</span>
+          </div>
+
+          <div class="panel">
+            <ol class="feed" id="activity-feed"></ol>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="dialog" id="request-dialog" aria-labelledby="request-title" aria-modal="true">
+    <form id="request-form" novalidate>
+      <div class="dialog-head">
+        <h2 id="request-title">Start Lab</h2>
+        <button type="button" class="icon-btn" id="close-dialog" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="lab-select">Lab</label>
+        <select id="lab-select" class="input select"></select>
+      </div>
+
+      <div class="field-group">
+        <span class="field-label">Time to live</span>
+        <div class="ttl-fixed">60 minutes - fixed, no extension</div>
+        <p class="field-hint">The lab environment is destroyed automatically when time expires.</p>
+        <p class="field-hint" id="quota-hint" hidden></p>
+      </div>
+
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary" id="cancel-request">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="submit-request">
+          <span class="btn-label">Start Lab</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="dialog dialog-sm" id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-message" aria-modal="true">
+    <div class="dialog-head">
+      <h2 id="confirm-title">Confirm action</h2>
+      <button type="button" class="icon-btn" id="confirm-close" aria-label="Close confirmation dialog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <p id="confirm-message" class="confirm-message"></p>
+
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-secondary" id="confirm-cancel">Cancel</button>
+      <button type="button" class="btn btn-danger" id="confirm-submit">Confirm</button>
+    </div>
+  </dialog>
+
+  <div class="toasts" id="toast-region" aria-live="polite" aria-atomic="false"></div>
+
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>

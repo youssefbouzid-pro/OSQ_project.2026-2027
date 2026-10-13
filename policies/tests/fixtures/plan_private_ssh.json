@@ -1,0 +1,56 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.8",
+  "resource_changes": [
+    {
+      "address": "aws_security_group.lab",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "lab",
+      "change": {
+        "action": "create",
+        "before": null,
+        "after": {
+          "name": "lab-sg",
+          "description": "lab access over tailscale",
+          "ingress": [
+            {
+              "description": "ssh via tailscale",
+              "from_port": 22,
+              "to_port": 22,
+              "protocol": "tcp",
+              "cidr_blocks": ["100.64.0.0/10"],
+              "ipv6_cidr_blocks": [],
+              "security_groups": [],
+              "self": false
+            }
+          ],
+          "egress": [],
+          "tags": {
+            "Project": "cloudybttounsi",
+            "Environment": "dev",
+            "Tier": "lab"
+          }
+        }
+      }
+    },
+    {
+      "address": "aws_instance.lab",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "lab",
+      "change": {
+        "action": "create",
+        "before": null,
+        "after": {
+          "instance_type": "t4g.micro",
+          "tags": {
+            "Project": "cloudybttounsi",
+            "Environment": "dev",
+            "Tier": "lab"
+          }
+        }
+      }
+    }
+  ]
+}
