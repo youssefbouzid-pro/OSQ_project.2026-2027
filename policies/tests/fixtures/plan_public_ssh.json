@@ -27,7 +27,7 @@
           ],
           "egress": [],
           "tags": {
-            "Project": "cloudybttounsi",
+            "Project": "osq",
             "Environment": "dev",
             "Tier": "lab"
           }

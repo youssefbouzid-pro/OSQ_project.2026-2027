@@ -17,7 +17,7 @@ Also hardens the VPC: default security group has **no rules**, DNS support/hostn
 ```hcl
 module "network" {
   source      = "../../modules/network"
-  project     = "cloudybttounsi"
+  project     = "osq"
   environment = "dev"
 }
 ```

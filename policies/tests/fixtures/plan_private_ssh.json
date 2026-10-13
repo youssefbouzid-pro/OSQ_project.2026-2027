@@ -27,7 +27,7 @@
           ],
           "egress": [],
           "tags": {
-            "Project": "cloudybttounsi",
+            "Project": "osq",
             "Environment": "dev",
             "Tier": "lab"
           }
@@ -45,7 +45,7 @@
         "after": {
           "instance_type": "t4g.micro",
           "tags": {
-            "Project": "cloudybttounsi",
+            "Project": "osq",
             "Environment": "dev",
             "Tier": "lab"
           }

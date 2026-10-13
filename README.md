@@ -11,7 +11,7 @@ This repository is an 8-week academic proof of concept built by a team of four. 
 3. The Lab Manager creates a session with a fixed 60-minute TTL and requests a short-lived Tailscale auth key.
 4. An EC2 instance is launched from a Terraform-approved launch template using the AWS SDK. Terraform is never run per lab request.
 5. The instance joins the tailnet on first boot. The session becomes READY only after Tailscale access is confirmed.
-6. The student connects with `tailscale ssh student@<host>OSQ.ts.net`. Port 22 is never open to the internet.
+6. The student connects with `tailscale ssh student@<host>.cloudybt-tounsi.ts.net`. Port 22 is never open to the internet.
 7. When the TTL expires, a scheduled garbage collector terminates the instance and writes an audit entry.
 
 ## Architecture

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This diagram shows the simplified authentication model for the CloudyBTTounsi PoC.
+This diagram shows the simplified authentication model for the osq PoC.
 
 The platform does not use Keycloak, Cognito, Auth0, or another dedicated identity engine.
 

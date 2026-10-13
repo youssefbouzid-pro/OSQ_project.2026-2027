@@ -2,7 +2,7 @@
 
 > **Scope note:** This charter's generic 8-week sequence is superseded by
 > [`diagrams/07-delivery-roadmap.md`](../diagrams/07-delivery-roadmap.md), which sequences the work for the
-> CloudyBTTounsi Lab Platform. Use the policy catalog in
+> osq Lab Platform. Use the policy catalog in
 > [`docs/10-governance-compliance-audit.md`](../docs/10-governance-compliance-audit.md) as the
 > architecture-specific starting set, and the generic examples below as the pattern.
 

@@ -117,7 +117,7 @@ def make_config(**overrides):
         lab_subnet_id="subnet-123",
         lab_instance_profile="lab-profile",
         tailscale_auth_key_parameter="/cloudybt/tailscale/authkey",
-        project_tag="cloudybttounsi",
+        project_tag="osq",
     )
     values.update(overrides)
     return Config(**values)
@@ -164,7 +164,7 @@ def test_required_tags_from_docs_15():
         "expiresAt": "2026-04-14T11:00:00Z",
     }
     tags = {t["Key"]: t["Value"] for t in lab_ops.build_tags(config, session)}
-    assert tags["Project"] == "cloudybttounsi"
+    assert tags["Project"] == "osq"
     assert tags["ManagedBy"] == "lab-manager"
     assert tags["LabId"] == "linux-beginner"
     assert tags["SessionId"] == "lab-12345"

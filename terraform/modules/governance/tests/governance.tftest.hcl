@@ -27,9 +27,9 @@ mock_provider "aws" {
 }
 
 variables {
-  name_prefix        = "cloudybttounsi-test"
+  name_prefix        = "osq-test"
   log_retention_days = 365
-  tags               = { Project = "cloudybttounsi" }
+  tags               = { Project = "osq" }
 }
 
 run "trail_is_a_real_audit_trail" {
@@ -58,7 +58,7 @@ run "trail_is_a_real_audit_trail" {
   }
 
   assert {
-    condition     = aws_cloudtrail.main.name == "cloudybttounsi-test-trail"
+    condition     = aws_cloudtrail.main.name == "osq-test-trail"
     error_message = "the trail name is what the KMS key policy scopes its encryption context to; a rename without a matching key policy change stops the trail writing."
   }
 }
@@ -126,7 +126,7 @@ run "trail_events_are_queryable" {
   # CloudTrail writes to S3, but S3 cannot answer "did the trail stop?".
   # docs/17 calls for CloudTrail alerts, and that needs a Logs stream.
   assert {
-    condition     = aws_cloudwatch_log_group.trail.name == "/aws/cloudtrail/cloudybttounsi-test-trail"
+    condition     = aws_cloudwatch_log_group.trail.name == "/aws/cloudtrail/osq-test-trail"
     error_message = "the log group name is the one CloudTrail expects; a mismatch means events are silently dropped."
   }
 
@@ -136,7 +136,7 @@ run "trail_events_are_queryable" {
   }
 
   assert {
-    condition     = aws_sns_topic.audit.name == "cloudybttounsi-test-audit"
+    condition     = aws_sns_topic.audit.name == "osq-test-audit"
     error_message = "docs/17 calls for CloudTrail alerts, which need a topic to publish to. Subscriptions are an operator decision; the topic is not."
   }
 }

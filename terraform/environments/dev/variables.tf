@@ -7,7 +7,7 @@ variable "region" {
 variable "project" {
   type        = string
   description = "Project name used for resource naming and tags."
-  default     = "cloudybttounsi"
+  default     = "osq"
 
   validation {
     condition     = can(regex("^[a-z][a-z0-9-]{2,30}$", var.project))

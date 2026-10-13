@@ -11,15 +11,15 @@
         "action": "create",
         "before": null,
         "after": {
-          "name": "cloudybttounsi-trail",
+          "name": "osq-trail",
           "enable_log_file_validation": true,
           "enable_logging": true,
           "include_global_service_events": true,
           "is_multi_region_trail": true,
           "kms_key_id": "arn:aws:kms:eu-west-1:111111111111:key/00000000-0000-0000-0000-000000000000",
-          "s3_bucket_name": "cloudybttounsi-trail-logs",
+          "s3_bucket_name": "osq-trail-logs",
           "s3_key_prefix": "cloudtrail",
-          "sns_topic_name": "cloudybttounsi-audit"
+          "sns_topic_name": "osq-audit"
         }
       }
     }

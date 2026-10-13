@@ -29,12 +29,12 @@ mock_provider "aws" {
 }
 
 variables {
-  name_prefix = "cloudybttounsi-test"
+  name_prefix = "osq-test"
   vpc_id      = "vpc-0aaa1111"
   subnet_id   = "subnet-0aaa1111"
   lab_ami_id  = "ami-0approved00000000"
   ami_ids     = { linux = "ami-0approved00000000" }
-  tags        = { Project = "cloudybttounsi" }
+  tags        = { Project = "osq" }
 }
 
 # ---------------------------------------------------------------------------
@@ -53,7 +53,7 @@ run "security_group_declares_its_intent" {
   assert {
     condition = (
       aws_security_group.lab.description == "Ephemeral learner labs. Egress only: access is over Tailscale, never the public internet." &&
-      aws_security_group.lab.name == "cloudybttounsi-test-lab"
+      aws_security_group.lab.name == "osq-test-lab"
     )
     error_message = "the lab security group must keep its Tailscale-only description and its <name_prefix>-lab name."
   }

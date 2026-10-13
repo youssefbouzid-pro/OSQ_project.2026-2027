@@ -52,7 +52,7 @@ sequenceDiagram
 Every dynamically created lab instance must include these tags:
 
 ```text
-Project       = cloudybt-tounsi
+Project       = osq
 ManagedBy     = lab-manager
 LabType       = linux
 SessionId     = lab-9f2a

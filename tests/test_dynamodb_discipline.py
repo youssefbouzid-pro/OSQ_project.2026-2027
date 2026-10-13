@@ -66,7 +66,7 @@ def make_app():
             max_active_labs_platform=4,
             orchestrator_function="orchestrator",
             terminator_function="orchestrator",
-            project_tag="cloudybttounsi",
+            project_tag="osq",
             launch_template_name="lab-template",
             lab_security_group_id="sg-123",
             lab_subnet_id="subnet-123",
@@ -168,7 +168,7 @@ def test_user_data_includes_task_instructions_without_answers():
     }
     script = lab_ops.build_user_data(config, session, lab)
 
-    assert "mkdir -p /etc/cloudybt" in script
+    assert "mkdir -p /etc/osq" in script
     assert "Locate the application config" in script
     assert "Fix the config permissions" in script
     assert "CB-LINUX-B-01" not in script
@@ -187,9 +187,9 @@ def test_user_data_heredocs_are_balanced():
     )
     # Every opener has a matching delimiter on its own line.
     lines = [line.strip() for line in script.splitlines()]
-    assert lines.count("cat > /etc/cloudybt/session.json <<'SESSION'") == 1
+    assert lines.count("cat > /etc/osq/session.json <<'SESSION'") == 1
     assert lines.count("SESSION") == 1
-    assert lines.count("cat > /etc/cloudybt/tasks.json <<'TASKS'") == 1
+    assert lines.count("cat > /etc/osq/tasks.json <<'TASKS'") == 1
     assert lines.count("TASKS") == 1
     assert "set -euo pipefail" in lines
 

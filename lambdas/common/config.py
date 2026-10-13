@@ -28,7 +28,7 @@ class Config:
             lab_subnet_id=get("LAB_SUBNET_ID", ""),
             lab_instance_profile=get("LAB_INSTANCE_PROFILE", ""),
             tailscale_auth_key_parameter=get("TAILSCALE_AUTH_KEY_PARAMETER", ""),
-            project_tag=get("PROJECT_TAG", "cloudybttounsi"),
+            project_tag=get("PROJECT_TAG", "osq"),
             ttl_minutes=int(get("TTL_MINUTES", "60")),
             ready_timeout_seconds=int(get("READY_TIMEOUT_SECONDS", "180")),
             max_active_labs_per_user=int(get("MAX_ACTIVE_LABS_PER_USER", "4")),

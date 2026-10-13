@@ -4,7 +4,7 @@ This document is internal. It should not be shown in the learner UI.
 
 ## Governance Goal
 
-CloudyBTTounsi should provision labs only from approved, controlled infrastructure.
+osq should provision labs only from approved, controlled infrastructure.
 
 Learners should never manage cloud resources directly.
 

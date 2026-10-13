@@ -1,8 +1,8 @@
-# CloudyBTTounsi Documentation
+# osq Documentation
 
-This folder contains the full documentation for the CloudyBTTounsi PoC.
+This folder contains the full documentation for the osq PoC.
 
-CloudyBTTounsi is a learner-facing AWS lab platform. It provisions temporary lab environments, lets learners complete tasks, submit flags, and connect through Tailscale.
+osq is a learner-facing AWS lab platform. It provisions temporary lab environments, lets learners complete tasks, submit flags, and connect through Tailscale.
 
 This project is a proof of concept, not a production SaaS platform.
 

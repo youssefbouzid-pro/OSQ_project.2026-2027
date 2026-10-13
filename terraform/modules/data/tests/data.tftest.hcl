@@ -10,8 +10,8 @@
 mock_provider "aws" {}
 
 variables {
-  name_prefix = "cloudybttounsi-test"
-  tags        = { Project = "cloudybttounsi" }
+  name_prefix = "osq-test"
+  tags        = { Project = "osq" }
 }
 
 run "all_four_tables_exist" {
@@ -25,10 +25,10 @@ run "all_four_tables_exist" {
         sessions = aws_dynamodb_table.sessions.name
         activity = aws_dynamodb_table.activity.name
         } == {
-        users    = "cloudybttounsi-test-users"
-        labs     = "cloudybttounsi-test-labs"
-        sessions = "cloudybttounsi-test-sessions"
-        activity = "cloudybttounsi-test-activity"
+        users    = "osq-test-users"
+        labs     = "osq-test-labs"
+        sessions = "osq-test-sessions"
+        activity = "osq-test-activity"
       }
     )
     error_message = "docs/16 names four tables; each must be <name_prefix>-<table> so they cannot collide across environments."

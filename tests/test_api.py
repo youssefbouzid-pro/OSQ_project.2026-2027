@@ -33,7 +33,7 @@ def make_config(**overrides):
         max_active_labs_platform=4,
         orchestrator_function="orchestrator",
         terminator_function="orchestrator",
-        project_tag="cloudybttounsi",
+        project_tag="osq",
         launch_template_name="lab-template",
         lab_security_group_id="sg-123",
         lab_subnet_id="subnet-123",

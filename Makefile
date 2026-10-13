@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 TF_DIRS        := bootstrap terraform/environments/dev
 TF_MODULE_DIRS := terraform/modules/network terraform/modules/data terraform/modules/lab terraform/modules/api terraform/modules/frontend terraform/modules/governance
-PROJECT        ?= cloudybttounsi
+PROJECT        ?= osq
 REGION         ?= us-east-1
 # Prefer the local venv (holds boto3 + pytest) when it exists.
 PYTHON         ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python3)

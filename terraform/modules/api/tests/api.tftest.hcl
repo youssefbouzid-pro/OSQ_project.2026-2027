@@ -29,23 +29,23 @@ mock_provider "aws" {
 }
 
 variables {
-  name_prefix = "cloudybttounsi-test"
+  name_prefix = "osq-test"
 
   lambda_source_dir = "../../../lambdas"
 
-  users_table_name    = "cloudybttounsi-test-users"
-  users_table_arn     = "arn:aws:dynamodb:us-east-1:111111111111:table/cloudybttounsi-test-users"
-  labs_table_name     = "cloudybttounsi-test-labs"
-  labs_table_arn      = "arn:aws:dynamodb:us-east-1:111111111111:table/cloudybttounsi-test-labs"
-  sessions_table_name = "cloudybttounsi-test-sessions"
-  sessions_table_arn  = "arn:aws:dynamodb:us-east-1:111111111111:table/cloudybttounsi-test-sessions"
-  activity_table_name = "cloudybttounsi-test-activity"
-  activity_table_arn  = "arn:aws:dynamodb:us-east-1:111111111111:table/cloudybttounsi-test-activity"
+  users_table_name    = "osq-test-users"
+  users_table_arn     = "arn:aws:dynamodb:us-east-1:111111111111:table/osq-test-users"
+  labs_table_name     = "osq-test-labs"
+  labs_table_arn      = "arn:aws:dynamodb:us-east-1:111111111111:table/osq-test-labs"
+  sessions_table_name = "osq-test-sessions"
+  sessions_table_arn  = "arn:aws:dynamodb:us-east-1:111111111111:table/osq-test-sessions"
+  activity_table_name = "osq-test-activity"
+  activity_table_arn  = "arn:aws:dynamodb:us-east-1:111111111111:table/osq-test-activity"
 
   lab_subnet_id             = "subnet-0aaa1111"
   lab_security_group_id     = "sg-0aaa1111"
-  lab_instance_profile_name = "cloudybttounsi-test-lab"
-  launch_template_name      = "cloudybttounsi-test-lab"
+  lab_instance_profile_name = "osq-test-lab"
+  launch_template_name      = "osq-test-lab"
 
   ttl_minutes              = 60
   max_active_labs_per_user = 4
@@ -53,8 +53,8 @@ variables {
   ready_timeout_seconds    = 180
 
   tags = {
-    Project   = "cloudybttounsi"
-    Component = "cloudybt-tounsi"
+    Project   = "osq"
+    Component = "osq"
   }
 }
 

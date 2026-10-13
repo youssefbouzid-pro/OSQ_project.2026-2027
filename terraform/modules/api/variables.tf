@@ -1,6 +1,6 @@
 variable "name_prefix" {
   type        = string
-  description = "Prefix for resource names, e.g. cloudybttounsi-dev."
+  description = "Prefix for resource names, e.g. osq-dev."
 }
 
 variable "tags" {

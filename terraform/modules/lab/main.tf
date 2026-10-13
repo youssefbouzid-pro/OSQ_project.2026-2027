@@ -163,7 +163,7 @@ resource "aws_iam_instance_profile" "lab" {
 
 resource "aws_launch_template" "lab" {
   name        = local.launch_template_name
-  description = "Approved settings for CloudyBTTounsi ephemeral labs (docs/15)."
+  description = "Approved settings for osq ephemeral labs (docs/15)."
 
   image_id      = var.lab_ami_id
   instance_type = "t4g.micro"

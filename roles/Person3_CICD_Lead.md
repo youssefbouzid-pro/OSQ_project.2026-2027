@@ -2,7 +2,7 @@
 
 > **Scope note:** This charter's generic 8-week sequence is superseded by
 > [`diagrams/07-delivery-roadmap.md`](../diagrams/07-delivery-roadmap.md), which sequences the work for the
-> CloudyBTTounsi Lab Platform. Pipeline design, including GitHub OIDC authentication and secrets handling,
+> osq Lab Platform. Pipeline design, including GitHub OIDC authentication and secrets handling,
 > is specified in [`diagrams/04-cicd-governance-pipeline.md`](../diagrams/04-cicd-governance-pipeline.md).
 
 ## Purpose

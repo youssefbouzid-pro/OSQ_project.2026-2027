@@ -2,7 +2,7 @@
   "use strict";
 
   /*
-   * Browser mock of the CloudyBTTounsi API.
+   * Browser mock of the osq API.
    *
    * Every object below is shaped exactly like the real service
    * (docs/16 "API and Data Model"). Switching off the mock is a transport
@@ -221,14 +221,14 @@
         "taskId": "devops-i-1",
         "title": "Build the image",
         "instruction": "Build the app image from /home/student/app.",
-        "hint": "Use: docker build -t cloudy-app .",
+        "hint": "Use: docker build -t osq-app .",
         "expectedFlag": "CB-DEVOPS-I-01"
       },
       {
         "taskId": "devops-i-2",
         "title": "Deploy the app",
         "instruction": "Run the app on port 8080 and verify it responds.",
-        "hint": "Use: docker run -p 8080:8080 cloudy-app",
+        "hint": "Use: docker run -p 8080:8080 osq-app",
         "expectedFlag": "CB-DEVOPS-I-02"
       }
     ]

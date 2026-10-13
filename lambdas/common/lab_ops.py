@@ -75,11 +75,11 @@ def build_user_data(config, session, lab):
         #!/bin/bash
         set -euo pipefail
 
-        exec > >(tee -a /var/log/cloudybt-bootstrap.log | logger -t cloudybt -s 2>/dev/console) 2>&1
+        exec > >(tee -a /var/log/osq-bootstrap.log | logger -t osq -s 2>/dev/console) 2>&1
 
-        mkdir -p /etc/cloudybt /var/log
+        mkdir -p /etc/osq /var/log
 
-        cat > /etc/cloudybt/session.json <<'SESSION'
+        cat > /etc/osq/session.json <<'SESSION'
         {{
           "sessionId": "{session_id}",
           "labId": "{lab_id}",
@@ -88,7 +88,7 @@ def build_user_data(config, session, lab):
         }}
         SESSION
 
-        cat > /etc/cloudybt/tasks.json <<'TASKS'
+        cat > /etc/osq/tasks.json <<'TASKS'
         {tasks}
         TASKS
 
@@ -109,7 +109,7 @@ def build_user_data(config, session, lab):
           fi
         fi
 
-        touch /etc/cloudybt/bootstrap.done
+        touch /etc/osq/bootstrap.done
         """
     )
 

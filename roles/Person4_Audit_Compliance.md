@@ -2,7 +2,7 @@
 
 > **Scope note:** This charter's generic 8-week sequence is superseded by
 > [`diagrams/07-delivery-roadmap.md`](../diagrams/07-delivery-roadmap.md), which sequences the work for the
-> CloudyBTTounsi Lab Platform. Drift detection and remediation must follow
+> osq Lab Platform. Drift detection and remediation must follow
 > [`diagrams/06-drift-remediation-workflow.md`](../diagrams/06-drift-remediation-workflow.md): Terraform is
 > the source of truth and remediation runs through `terraform apply`, not direct resource edits.
 

@@ -2,7 +2,7 @@
 
 ## Project Name
 
-CloudyBTTounsi
+osq
 
 ## Project Type
 
@@ -10,7 +10,7 @@ Learner-facing AWS lab platform proof of concept.
 
 ## Core Product
 
-CloudyBTTounsi allows learners to:
+osq allows learners to:
 
 1. Sign in.
 2. Browse labs.

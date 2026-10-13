@@ -11,12 +11,12 @@
         "action": "create",
         "before": null,
         "after": {
-          "name": "cloudybttounsi-trail",
+          "name": "osq-trail",
           "enable_log_file_validation": false,
           "enable_logging": false,
           "include_global_service_events": true,
           "is_multi_region_trail": true,
-          "s3_bucket_name": "cloudybttounsi-trail-logs",
+          "s3_bucket_name": "osq-trail-logs",
           "s3_key_prefix": "cloudtrail"
         }
       }

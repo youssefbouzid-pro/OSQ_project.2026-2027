@@ -2,7 +2,7 @@
 
 > **Scope note:** This charter's generic 8-week sequence is superseded by
 > [`diagrams/07-delivery-roadmap.md`](../diagrams/07-delivery-roadmap.md), which sequences the work for the
-> CloudyBTTounsi Lab Platform. The governance deliverables below (modules, state, tests, docs) are this
+> osq Lab Platform. The governance deliverables below (modules, state, tests, docs) are this
 > role's contribution to that platform; module names in the roadmap take precedence where they differ.
 
 ## Purpose
@@ -21,7 +21,7 @@ The goal is to create **6 clean, reusable, well-documented AWS modules** and a s
 
 Person 1 should deliver:
 
-1. Six AWS Terraform modules for the CloudyBTTounsi platform:
+1. Six AWS Terraform modules for the osq platform:
    - `network` — VPC, public/app/data subnets, IGW, route tables, hardened security groups
    - `frontend` — S3 static site, CloudFront, optional Route 53
    - `api` — API Gateway, Lambda functions, IAM roles (token auth, **no Cognito**; see `docs/16`)

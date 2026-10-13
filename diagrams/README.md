@@ -1,6 +1,6 @@
-# CloudyBTTounsi Diagrams
+# osq Diagrams
 
-This folder contains the updated architecture and workflow diagrams for the CloudyBTTounsi Lab Platform.
+This folder contains the updated architecture and workflow diagrams for the osq Lab Platform.
 
 The diagrams reflect the current PoC scope:
 

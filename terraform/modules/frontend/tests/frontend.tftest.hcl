@@ -15,9 +15,9 @@ mock_provider "aws" {
 }
 
 variables {
-  name_prefix = "cloudybttounsi-test"
+  name_prefix = "osq-test"
   source_dir  = "../../../frontend"
-  tags        = { Project = "cloudybttounsi" }
+  tags        = { Project = "osq" }
 }
 
 run "bucket_is_not_public" {

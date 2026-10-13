@@ -8,6 +8,6 @@ locals {
     Project     = var.project
     Environment = var.environment
     ManagedBy   = "terraform"
-    Component   = "cloudybt-tounsi"
+    Component   = "osq"
   }
 }

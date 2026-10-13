@@ -7,7 +7,15 @@
 
   function applyStoredState() {
     try {
-      if (localStorage.getItem("cloudy.nav.hidden") === "1") {
+      var stored = localStorage.getItem("osq.nav.hidden");
+      if (stored === null) {
+        stored = localStorage.getItem("cloudy.nav.hidden");
+        if (stored !== null) {
+          localStorage.setItem("osq.nav.hidden", stored);
+          localStorage.removeItem("cloudy.nav.hidden");
+        }
+      }
+      if (stored === "1") {
         document.body.classList.add("nav-hidden");
       }
     } catch (err) {}
@@ -28,7 +36,7 @@
 
         try {
           localStorage.setItem(
-            "cloudy.nav.hidden",
+            "osq.nav.hidden",
             document.body.classList.contains("nav-hidden") ? "1" : "0"
           );
         } catch (err) {}

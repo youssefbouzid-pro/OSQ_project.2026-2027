@@ -1,6 +1,6 @@
 variable "name_prefix" {
   type        = string
-  description = "Prefix for table names, e.g. cloudybttounsi-dev."
+  description = "Prefix for table names, e.g. osq-dev."
 
   validation {
     condition     = can(regex("^[a-z][a-z0-9-]{2,40}$", var.name_prefix))

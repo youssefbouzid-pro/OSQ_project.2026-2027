@@ -14,7 +14,7 @@
           "name": "devops-lab",
           "instance_type": "m5.2xlarge",
           "tags": {
-            "Project": "cloudybttounsi",
+            "Project": "osq",
             "Environment": "dev",
             "Tier": "lab"
           }

@@ -1,5 +1,7 @@
 # Deployment Guide
 
+The Terraform project default is now `osq`. Existing deployments may have resource names, state backend names, SSM parameters, and tags using the former project prefix. Before applying this configuration to an existing state, keep the prior `project` value in `terraform.tfvars` (or pass `-var=project=<existing-prefix>`) to avoid planned resource replacement. New deployments can use `osq`. The existing `/cloudybt/...` SSM parameter paths and Tailscale DNS suffix are retained for compatibility; migrate those external identifiers separately only after updating the AWS parameters and tailnet configuration.
+
 ## Prerequisites
 
 Required:
@@ -20,7 +22,7 @@ Optional:
 
 ## Repository Layout Recommendation
 
-    cloudybt-tounsi/
+    osq/
       frontend/
       docs/
       terraform/
@@ -66,8 +68,8 @@ Example:
 The tables are empty on first apply. Load the lab catalog and mint the
 learner tokens:
 
-    make seed-labs LABS_TABLE=cloudybttounsi-dev-labs
-    make seed-users USERS_TABLE=cloudybttounsi-dev-users
+    make seed-labs LABS_TABLE=osq-dev-labs
+    make seed-users USERS_TABLE=osq-dev-users
 
 `scripts/seed_users.py` prints each plaintext token exactly once and
 stores only its SHA-256 hash. Hand the tokens to learners out of band:

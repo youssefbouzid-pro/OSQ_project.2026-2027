@@ -86,7 +86,7 @@ User-data should only inject session-specific data:
 
 Every lab instance must have:
 
-    Project       = cloudybt-tounsi
+    Project       = osq
     ManagedBy     = lab-manager
     LabId         = linux-beginner
     SessionId     = lab-12345

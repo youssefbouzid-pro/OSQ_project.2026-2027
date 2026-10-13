@@ -307,7 +307,7 @@ resource "aws_lambda_function" "session_handler" {
   # release step. Out of scope for the PoC; revisit before any real
   # deployment.
   function_name    = "${local.name}-session-handler"
-  description      = "CloudyBTTounsi HTTP API (docs/16)."
+  description      = "osq HTTP API (docs/16)."
   role             = aws_iam_role.session_handler.arn
   handler          = "session_handler.handler.lambda_handler"
   runtime          = "python3.12"
@@ -656,7 +656,7 @@ resource "aws_scheduler_schedule" "ttl_gc" {
 
 resource "aws_apigatewayv2_api" "http" {
   name          = "${local.name}-http"
-  description   = "CloudyBTTounsi learner API (docs/16)."
+  description   = "osq learner API (docs/16)."
   protocol_type = "HTTP"
 
   cors_configuration {

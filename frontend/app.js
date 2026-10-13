@@ -3,7 +3,8 @@
 
   var api = window.LabAPI;
   var BUDGET = 20;
-  var TOKEN_KEY = "cloudy.token";
+  var TOKEN_KEY = "osq.token";
+  var LEGACY_TOKEN_KEY = "cloudy.token";
 
   var terminating = new Set();
   var currentView = "home";
@@ -1106,6 +1107,13 @@
     var stored = null;
     try {
       stored = sessionStorage.getItem(TOKEN_KEY);
+      if (!stored) {
+        stored = sessionStorage.getItem(LEGACY_TOKEN_KEY);
+        if (stored) {
+          sessionStorage.setItem(TOKEN_KEY, stored);
+          sessionStorage.removeItem(LEGACY_TOKEN_KEY);
+        }
+      }
     } catch (err) {}
 
     if (stored) {

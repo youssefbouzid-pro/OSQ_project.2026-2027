@@ -2,7 +2,7 @@
 
 ## Overview
 
-CloudyBTTounsi uses a serverless control plane and an ephemeral AWS lab plane.
+osq uses a serverless control plane and an ephemeral AWS lab plane.
 
 The platform is divided into:
 

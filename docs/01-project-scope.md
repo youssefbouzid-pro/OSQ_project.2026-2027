@@ -2,7 +2,7 @@
 
 ## Product Scope
 
-CloudyBTTounsi is a learner-facing lab platform.
+osq is a learner-facing lab platform.
 
 The user-facing frontend must focus on:
 

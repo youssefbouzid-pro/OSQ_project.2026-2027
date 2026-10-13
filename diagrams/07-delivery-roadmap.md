@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This diagram shows the recommended 8-week delivery plan for the updated CloudyBTTounsi PoC.
+This diagram shows the recommended 8-week delivery plan for the updated osq PoC.
 
 ---
 

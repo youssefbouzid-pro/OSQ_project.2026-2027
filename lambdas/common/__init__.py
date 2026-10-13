@@ -1,1 +1,1 @@
-"""Shared building blocks for every Lambda in the CloudyBTTounsi backend."""
+"""Shared building blocks for every Lambda in the osq backend."""

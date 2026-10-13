@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This diagram shows the updated CloudyBTTounsi architecture.
+This diagram shows the updated osq architecture.
 
 The platform is divided into:
 

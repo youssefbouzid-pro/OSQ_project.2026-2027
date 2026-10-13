@@ -12,7 +12,7 @@ mock_provider "aws" {
 }
 
 variables {
-  project     = "cloudybttounsi"
+  project     = "osq"
   environment = "dev"
 }
 
