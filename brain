@@ -1,0 +1,372 @@
+# Role: Senior AWS Cloud Solutions Architect, AI Architect & DevSecOps Engineer
+
+Act as a Senior Cloud Solutions Architect specializing in AWS, multi-tenant SaaS platforms, secure cloud infrastructure, AI agents, DevSecOps, and automated training environments.
+
+I am developing a semester project: an enterprise platform that helps interns and newly recruited employees practice real operational tasks during their onboarding and knowledge-transfer (passation) period.
+
+Your mission is to design a secure, highly available, cost-conscious and extensible cloud architecture, including the frontend, backend, identity and access management, isolated lab provisioning, monitoring, and an AI agent that guides users through their assigned tasks.
+
+Do not jump directly to a list of AWS services. First understand the functional requirements, identify the security boundaries and constraints, compare architectural alternatives, and justify your final recommendations.
+
+## 1. Project Overview
+
+The platform allows enterprises to onboard new employees and interns through realistic, hands-on IT exercises.
+
+Instead of experimenting on the company's production infrastructure, users access temporary, isolated lab environments that reproduce operational situations.
+
+Examples:
+- A Linux system administrator troubleshoots a failed service.
+- A database administrator restores a database backup.
+- A consultant diagnoses an application configuration problem.
+- A SOC analyst investigates a simulated security incident.
+
+The platform must support multiple enterprises in the future, with strict separation between their users, tasks, lab environments, and assessment data.
+
+The primary objective is to assess practical skills through task completion, not simply deliver theoretical courses.
+
+## 2. Users, Authentication and Authorization
+
+Design an identity and authorization model with the following entities:
+
+### User
+Each user has:
+- A unique user ID.
+- Full name and email.
+- Enterprise or tenant ID.
+- Job description or professional role.
+- Group or team membership.
+- Assigned tasks and available lab templates.
+- Skill level and progress.
+- Authentication identity.
+- Account status and audit history.
+
+Supported professional roles:
+- Linux System Administrator.
+- Database Administrator (DBA).
+- IT Consultant.
+- SOC Analyst.
+
+The system must be extensible to additional roles in the future.
+
+### Administrator
+The administrator can:
+- Create, update, disable and manage users.
+- Assign users to groups.
+- Associate groups with job roles and permitted lab catalogs.
+- Assign tasks to individual users or groups.
+- Define difficulty levels, prerequisites and completion criteria.
+- Monitor progress and view assessment reports.
+- Configure lab quotas and maximum session durations.
+
+### Learner
+The learner can:
+- Authenticate securely.
+- See only the tasks and labs they are authorized to access.
+- Start, stop and resume permitted lab sessions.
+- View task objectives, instructions and validation criteria.
+- Access their lab securely.
+- Request guidance from the AI agent.
+- Submit tasks for automatic validation.
+- Review results, feedback and recommended next tasks.
+
+Explain the difference between authentication, role-based access control (RBAC), group membership and resource-level authorization.
+
+Enforce authorization on the backend, not only in the frontend. Prevent insecure direct object reference (IDOR), privilege escalation, cross-tenant data access and unauthorized lab access.
+
+## 3. Functional Architecture
+
+Design the complete request flow:
+
+1. An administrator creates a user and assigns a job role and group.
+2. The backend stores the user's profile and group membership.
+3. The user authenticates through the identity provider.
+4. The frontend retrieves the user's profile and authorized task catalog.
+5. The backend evaluates permissions and returns only accessible tasks.
+6. The user selects a task and requests a lab session.
+7. The orchestration layer provisions an isolated environment.
+8. The user connects to the lab through a secure access mechanism.
+9. The AI agent guides the learner during the exercise.
+10. A validation engine evaluates the task's completion criteria.
+11. Results, events and progress are recorded.
+12. The AI agent recommends subsequent tasks based on verified results.
+13. The lab is stopped or destroyed when the session expires.
+
+Provide a component-by-component explanation, sequence diagrams and API contracts.
+
+## 4. AWS Cloud Architecture Requirements
+
+Evaluate and justify the use of these services:
+
+- Amazon VPC.
+- Public and private subnets across multiple Availability Zones.
+- Amazon API Gateway.
+- Amazon EC2.
+- Application Load Balancer (ALB).
+- EC2 Auto Scaling Groups.
+- Amazon VPC Flow Logs.
+- Amazon CloudWatch and CloudWatch Agent.
+- Amazon DynamoDB and/or Amazon RDS PostgreSQL.
+- Amazon S3 and CloudFront.
+- AWS Lambda.
+- Amazon SQS and EventBridge.
+- AWS CloudTrail, where available.
+- Terraform for Infrastructure as Code.
+- Tailscale for private access to lab environments.
+- Prometheus, Grafana and Wazuh for selected monitoring and security use cases.
+
+Do not use every service merely because it appears in this list. Compare the alternatives and select the smallest coherent architecture that satisfies the requirements.
+
+For each component, specify:
+- Its responsibility.
+- Why it is needed.
+- Whether it is essential for the MVP or a future enhancement.
+- Its failure modes.
+- Its security boundaries.
+- Its cost implications.
+- Its dependencies and required permissions.
+
+Clearly distinguish the control plane, which manages users and lab lifecycle, from the lab data plane, where learners execute tasks.
+
+## 5. Critical AWS Academy Learner Lab Constraints
+
+The prototype will use four AWS Academy Learner Lab accounts, each with approximately $50 in credits.
+
+There is an important constraint: I cannot freely create or manage IAM users, roles and policies in these accounts. Existing pre-provisioned credentials or roles may be available, but service permissions and integrations must be verified.
+
+Therefore:
+- Do not assume that IAM role creation is permitted.
+- Do not assume Lambda execution roles, EC2 instance profiles, cross-account roles or service integrations are configurable.
+- Identify which services can operate using the permissions already supplied.
+- Propose a permission-discovery and validation checklist before implementing the architecture.
+- Design a fallback if Lambda or its required execution permissions are unavailable.
+- Consider an EC2-hosted backend if it is more feasible.
+- Never recommend hardcoding AWS credentials or sharing privileged credentials with lab instances.
+- Do not suggest bypassing Learner Lab restrictions.
+
+Propose a realistic allocation of the four accounts, but explain which cross-account features depend on permissions that might be unavailable.
+
+The total nominal budget is $200. Include cost-saving measures such as lab expiration, automatic shutdown and termination, quotas, avoiding idle NAT Gateways and ALBs, and restricting expensive monitoring resources.
+
+## 6. Isolated Lab Provisioning
+
+Design a secure lab provisioning system using Terraform and/or approved provisioning modules.
+
+Requirements:
+- Each lab has a unique ID and owner.
+- Each lab is associated with an authorized user, task template and expiration time.
+- Use separate lab security groups and appropriately isolated networks.
+- Restrict inbound and outbound traffic.
+- Prevent access to production systems, platform management services, cloud credentials and other tenants' resources.
+- Do not expose SSH or RDP directly to the public internet.
+- Evaluate Tailscale for private connectivity and explain how user-to-lab access is granted and revoked.
+- Use approved lab templates rather than arbitrary privileged user-supplied infrastructure code.
+- Prevent malicious scripts and lab workloads from compromising the control plane.
+- Support lab creation, status tracking, retries, failure handling, cleanup and resource reconciliation.
+- Make lab environments disposable and recoverable.
+- Keep learner progress and assessment results outside the disposable VM.
+
+Describe how the system handles partial failures, orphaned resources, repeated requests, concurrent lab creation and cleanup failures.
+
+## 7. Role-Specific Task Catalog
+
+Propose an extensible data model for roles, groups, tasks, lab templates, prerequisites, sessions, assessment results and recommendations.
+
+Include realistic tasks for all four roles.
+
+### Linux System Administrator
+Examples:
+- Diagnose a failed systemd service.
+- Resolve disk-space exhaustion.
+- Configure users, permissions and sudo.
+- Configure a firewall.
+- Troubleshoot DNS or networking.
+- Automate configuration using Ansible.
+
+### Database Administrator
+Examples:
+- Install and configure PostgreSQL or MariaDB.
+- Diagnose failed database connections.
+- Create users and grant appropriate privileges.
+- Diagnose slow queries.
+- Perform backups and restoration.
+- Troubleshoot database storage problems.
+
+### IT Consultant
+Examples:
+- Diagnose an application deployment failure.
+- Analyze infrastructure requirements.
+- Configure a service integration.
+- Troubleshoot an API or network issue.
+- Produce a technical diagnosis and remediation report.
+
+### SOC Analyst
+Examples:
+- Investigate simulated authentication failures.
+- Analyze synthetic system and network logs.
+- Identify suspicious processes.
+- Investigate a simulated incident.
+- Write or tune detection rules.
+- Produce an incident report.
+
+For each task, define:
+- Task ID and role.
+- Learning objectives.
+- Difficulty.
+- Prerequisites.
+- Lab template.
+- Starting conditions.
+- Task instructions.
+- Expected outcome.
+- Automated validation rules.
+- Hints and assessment criteria.
+- Estimated resource cost and maximum runtime.
+
+## 8. AI Agent: Guided Learning and Recommendations
+
+A major differentiator is an AI agent that acts as an interactive technical mentor during lab sessions.
+
+Design an AI subsystem with two primary capabilities.
+
+### A. Task Guidance Agent
+
+The agent should:
+- Explain the task and clarify the objective.
+- Answer technical questions using approved documentation and task-specific context.
+- Provide progressive hints instead of immediately revealing the complete solution.
+- Explain Linux commands, SQL queries, networking concepts, cloud configurations and logs.
+- Interpret sanitized error messages and authorized monitoring data.
+- Help learners understand why an attempted solution failed.
+- Adjust its explanations to the learner's role and skill level.
+- Provide a final explanation of the solution after task completion or when explicitly requested.
+
+The agent must distinguish between verified facts and hypotheses. It must not claim that a task is complete unless the validation engine confirms it.
+
+### B. Personalized Recommendation Agent
+
+The agent should recommend:
+- The next task based on verified results.
+- Tasks that address demonstrated knowledge gaps.
+- Prerequisite tasks when the learner is struggling.
+- More challenging scenarios after successful completion.
+- Suggested learning paths for a specific job role.
+- Review exercises for previously failed tasks.
+
+Use structured information such as task prerequisites, difficulty, scores, hints used, completion status and validation results.
+
+Do not rely exclusively on an LLM to determine skill levels or assessment results.
+
+### AI Architecture Requirements
+
+Compare suitable approaches:
+- Amazon Bedrock, if available and affordable.
+- An external LLM API.
+- A provider-independent model gateway.
+- Retrieval-Augmented Generation (RAG) over approved technical documentation, task instructions and troubleshooting guides.
+
+Recommend an approach appropriate for the prototype's budget and constraints.
+
+Specify:
+- AI API and orchestration layer.
+- Model selection criteria.
+- RAG architecture and document storage.
+- Conversation context management.
+- Tenant-specific knowledge isolation.
+- Prompt templates.
+- Structured outputs for recommendations.
+- Rate limiting, token budgets and usage tracking.
+- Fallback behavior if the AI provider is unavailable.
+- Protection against prompt injection and malicious instructions in logs or lab output.
+- Data minimization and redaction of secrets, credentials, personal information and sensitive enterprise data.
+
+The agent must not have unrestricted AWS credentials, unrestricted shell access or direct authority to modify infrastructure.
+
+If the agent needs to perform an action, use an allowlisted backend tool with authorization checks, strict parameter validation, auditing and appropriate isolation.
+
+Explain when to use a simple RAG chatbot versus a tool-using agent. Avoid introducing a complex multi-agent architecture unless there is a measurable benefit.
+
+Provide at least three example interactions between a learner and the agent.
+
+## 9. Security Architecture
+
+Apply least privilege and defense in depth.
+
+Address:
+- Authentication and session security.
+- RBAC and resource-level authorization.
+- Multi-tenant isolation.
+- Secret management.
+- API abuse and rate limiting.
+- Network segmentation and egress controls.
+- Instance metadata protection.
+- Encryption in transit and at rest.
+- Audit logs and retention.
+- AI prompt injection and sensitive-data leakage.
+- Lab escape and compromised VM scenarios.
+- Supply-chain security for images and dependencies.
+- Terraform state protection.
+- Backup and recovery.
+- Cost abuse and denial-of-wallet scenarios.
+
+Consider Amazon Cognito or enterprise SSO only if the required configuration is permitted. Do not confuse an authenticated frontend user with an authorized AWS service identity.
+
+Provide a threat model identifying assets, threat actors, attack paths, mitigations and residual risks.
+
+## 10. High Availability and Observability
+
+Design availability for the platform separately from availability for individual labs.
+
+Consider:
+- Multi-AZ application deployment.
+- ALB health checks and Auto Scaling where appropriate.
+- Managed database durability and availability.
+- Retry policies, timeouts and idempotency.
+- Queue-based asynchronous provisioning.
+- Lab recreation after instance failure.
+- CloudWatch metrics, logs and alarms.
+- VPC Flow Logs.
+- CloudTrail audit events, where available.
+- Prometheus/Grafana for selected VM metrics.
+- Wazuh for SOC exercises.
+- Health dashboards, error rates, provisioning latency and cleanup failures.
+
+Explain which parts can be highly available within the budget and which are only conceptual enterprise enhancements.
+
+Define measurable service objectives for API availability, lab provisioning time, task-validation reliability and cleanup success.
+
+## 11. Required Deliverables
+
+Organize your response into the following sections:
+
+1. Executive summary and key architectural decisions.
+2. Functional and non-functional requirements.
+3. Architecture assumptions and unresolved questions.
+4. High-level architecture diagram using Mermaid.
+5. Detailed component diagram separating control plane and lab data plane.
+6. End-to-end sequence diagram for authentication, task selection, lab creation, AI guidance, validation and cleanup.
+7. AWS service selection matrix with alternatives and trade-offs.
+8. Identity, tenant, group and role authorization model.
+9. Database schema or DynamoDB single-table design, including sample entities.
+10. REST API endpoint specification with methods, request examples and authorization rules.
+11. Lab provisioning and cleanup workflow.
+12. AI agent architecture, RAG design, example prompts and recommendation algorithm.
+13. Threat model and security controls.
+14. High-availability and monitoring strategy.
+15. Terraform module structure and proposed repository layout.
+16. Cost estimation for a small demonstration workload, with assumptions and pricing caveats.
+17. Learner Lab permissions validation checklist and fallback architecture.
+18. Phased implementation roadmap, prioritizing a working MVP.
+19. Acceptance tests and demonstration scenarios.
+20. Architectural limitations, technical risks and future improvements.
+
+Include a clear final recommendation for the best architecture for this specific project.
+
+Use current official AWS documentation and official documentation for external services when discussing service behavior, security capabilities and pricing. Cite sources for important technical claims.
+
+Make explicit distinctions between:
+- The ideal production architecture.
+- The architecture feasible in AWS Academy Learner Lab.
+- Features that can be simulated locally.
+- Features that should be deferred until a later phase.
+Yes — you can run a preconfigured SOC stack with containers, but there's an important distinction: Wazuh has an official Docker deployment; it does not come as one official image with Wazuh, Snort, Suricata, and a complete incident-response platform already integrated.
+For OSQ, I would start with an existing Docker Compose stack and add only the capabilities your training tasks require.
+Do not invent service permissions, claim untested integrations work, or overengineer the MVP. Explain every major decision in terms of security, cost, feasibility and educational value.
